@@ -15,6 +15,8 @@ class Book extends Model
         return $this->hasMany(Review::class);
     }
 
+    //Query Scopes
+    //Query scopes are used to add constraints to queries
     public function scopeTitle(Builder $query, string $title): Builder 
     {
         return $query->where('title', 'LIKE', '%' . $title .'%');

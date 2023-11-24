@@ -40,12 +40,12 @@ class BookController extends Controller
         //U need a unique key for each cache item, so u can use the current url as the key and it is more secure
         $cacheKey = 'books:' . $filter . ':' . $title;
         $books = 
-        // cache()->remember(
-        //     $cacheKey, 
-        //     3600, 
-        //     fn() => 
-            $books->paginate(10)->withQueryString();
-        //);
+         cache()->remember(
+             $cacheKey, 
+             3600, 
+             fn() => 
+            $books->paginate(10)->withQueryString()
+        );
 
         
         //return the view with the filtered books
@@ -79,9 +79,12 @@ class BookController extends Controller
             3600, 
             fn() => 
             Book::with([
-            "review" => fn ($query) => $query->latest()
+            "review" => fn ($query) => $query->latest(),
         ])->withAvgRating()->withReviewsCount()->findOrFail($id)
-    );
+        );
+
+        //$reviews = $book->review;
+
         return view("books.show", ["book" => $book]);
     }
 

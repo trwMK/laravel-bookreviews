@@ -20,7 +20,8 @@ Route::get('/', function () {
     return redirect()->route("books.index");
 });
 
-
+// these route declarations define resourceful routes for managing books and their reviews.
+// The books resource provides routes for listing books and displaying individual book details. 
+// The reviews resource, nested under books, provides routes for managing reviews associated with a specific book.
 Route::resource('books',BookController::class)->only(["index", "show"]);
-
 Route::resource('books.reviews', ReviewController::class)->scoped(['review' => 'book']);

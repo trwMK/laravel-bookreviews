@@ -12,7 +12,7 @@ class ReviewController extends Controller
         $this->middleware('throttle:reviews')->only(['store']);
     }
 
-
+ 
     /**
      * Display a listing of the resource.
      */
